@@ -11,7 +11,7 @@ class API extends Component{
         this.loadPerson();        
     }
     loadPerson = async() =>{
-        let pessoa = await fetch('http://localhost:8001/pessoa').then(resp => resp.json())
+        let pessoa = await fetch('/pessoa').then(resp => resp.json())
         this.setState({['nome']:pessoa.nome,
                         ['idade']:pessoa.idade})
     }
