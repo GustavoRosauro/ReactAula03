@@ -5,23 +5,36 @@ class API extends Component{
         super(props)
         this.state = {
             nome:'',
-            idade:0
+            idade:0,
+            lista:[]
         }
         this.loadPerson = this.loadPerson.bind(this)
         this.loadPerson();        
     }
     loadPerson = async() =>{
-        let pessoa = await fetch('http://localhost:8001/pessoa').then(resp => resp.json())
-        this.setState({['nome']:pessoa.nome,
-                        ['idade']:pessoa.idade})
+        let lista = await fetch('/pessoa').then(resp => resp.json())
+        console.log(lista)
+        this.setState({['lista']:lista})
     }
     render(){
         return(
             <div className='col-md-6'>
-                <label>Nome</label>
-                <input className='form-control' name='nome' value={this.state.nome} disabled/>
-                <label>Idade</label>
-                <input className='form-control' name='idade' value={this.state.idade} disabled/>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.lista.map(x => 
+                            <tr key={x.id}>
+                                <td>{x.nome}</td>
+                                <td>{x.idade}</td>
+                            </tr>    
+                        )}
+                    </tbody>
+                </table>
             </div>
         )
     }
