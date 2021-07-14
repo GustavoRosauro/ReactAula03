@@ -24,6 +24,25 @@ app.post('/pessoa',(req,res)=>{
     })
     res.end("ok")
 })
+app.get('/pessoa/:id',(req,res)=>{
+    Pessoa.findAll({where:{'id':req.params.id}}).then((pessoa)=>{        
+        res.json(pessoa[0].dataValues);
+    })
+})
+app.put('/pessoa/:id',(req,res)=>{
+    Pessoa.update(
+        {
+            nome:req.body.nome,
+            idade:req.body.idade
+        },
+        {where:{'id':req.params.id}}
+    )
+    res.end("alterado")
+})
+app.delete('/pessoa/:id',(req,res)=>{
+    Pessoa.destroy({where:{'id':req.params.id}});
+    res.end('removido')
+})
 app.listen(8001, () => {
     console.log('porta 8001')
 })
