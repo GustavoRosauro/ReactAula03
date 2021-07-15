@@ -7,10 +7,12 @@ import App from './App';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import reportWebVitals from './reportWebVitals';
 import API from './api';
+import RecivedId from './reciveId';
 
 ReactDOM.render(
   <BrowserRouter>
   <Switch>
+    <Route exact path='/teste/:id' component={RecivedId}/>
     <Route exact path='/api' component={API}/>
     <Route exact path='/exemplo' component={Exemplo}/>
     <Route exact path='/' component={App} />
